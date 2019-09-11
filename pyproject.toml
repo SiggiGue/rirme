@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "rirme"
+version = "0.1.0"
+description = "Room Impulse Response Measuring and Evaluation package"
+authors = ["Siegfried Gündert <siegfried.guendert@uni-oldenburg.de>"]
+license = "MPL-2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+click = "^7.0"
+gccestimating = {git = "git@gitlab.uni-oldenburg.de:wern7603/gccestimating.git"}
+h5py = "^2.9"
+hdfdict = "^0.3.1"
+matplotlib = "^3.1"
+numpy = "^1.17"
+python = "^3.7"
+pyyaml = "^5.1"
+scipy = "^1.3"
+sounddevice = "^0.3.13"
+soundfile = "^0.10.2"
+syncsweptsine = {git = "git@gitlab.uni-oldenburg.de:wern7603/syncsweptsine.git"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.0"
+pytest-assume = "^2.2"
+pytest-cov = "^2.7"
+ipython = "^7.7"
+jupyter = "^1.0"
+pyside2 = "^5.13"
+pylint = "^2.3"
+
+[tool.poetry.scripts]
+rirme = 'rirme.shell:cli'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

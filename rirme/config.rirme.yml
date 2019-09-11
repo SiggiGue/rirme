@@ -1,0 +1,35 @@
+measurement:
+  auto: True
+  samplerate: 44100
+  wait_before_start_sec: 1
+  flanksamples: 4096
+  pausestart: 4096
+  pausestop: 4096
+  delays: [0, 0]
+  irlength: 8192
+  window: 1024
+  # sweep measurement additional parameters
+  # adaptive delay and rt estimator
+  blocksize: 4096
+  maxdecaytime_sec: 10
+  bgnoiseblocks: 10
+
+sweep:
+  durationappr: 10
+  startfreq: 80
+  stopfreq: 16000
+  level_dbfs: -20
+
+noise:
+  duration: 2
+  level_dbfs: -6
+  
+sounddevice:
+  device: 42  # look for devices via rirmeasuring.devices()
+  channels: 18
+  channelmap_input: [5, 6]  # channels of inputs starting at 1
+  channelmap_output: [1, 2]  # channels of outputs starting at 1
+  dtype: float32
+
+rirmeasuring:
+  version: 0.1.0
