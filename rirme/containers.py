@@ -4,6 +4,8 @@ import pathlib as _pathlib
 import numpy as _np
 
 import hdfdict as _hdfdict
+import soundfile as _sf
+import scipy.io.matlab as _mat
 
 from . import conf as _cfg
 
