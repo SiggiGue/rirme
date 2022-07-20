@@ -23,13 +23,14 @@ class Result:
     samplerate: float
     rirs: _np.ndarray
 
-    def save(self, path='.', fname=''):
+    def save(self, path='.', fname='', mode='w'):
         if not fname:
             fname = '.'.join((self.uid, _cfg.H5FILEEXT))
         fpath = str(_pathlib.Path(path)/fname)
         _hdfdict.dump(
             _dataclasses.asdict(self), 
-            fpath
+            fpath,
+            mode=mode
             )
         return fpath
 

@@ -33,7 +33,7 @@ _logger = _logging.getLogger(_cfg.LOGGERNAME)
 devices = _sd.query_devices
 
 
-DEFAULTS = _cfg._load_defaults()
+DEFAULTS = _cfg.load_defaults()
 
 
 def create_normalized_white_gaussian_noise(samples, channels=None):

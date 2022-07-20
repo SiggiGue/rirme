@@ -22,6 +22,7 @@ LOGGERNAME = 'rirme'
 _logging.basicConfig(format='%(levelname)s: %(message)s', level=_logging.INFO)
 logger = _logging.getLogger(LOGGERNAME)
 
+
 def _check_config_version(config):
     config_version = config['rirmeasuring']['version']
     if config_version != __version__:
@@ -41,14 +42,19 @@ def load_config(filepath):
     with open(filepath, 'r') as fp:
         return _check_config_version(dict(_yaml.safe_load(fp)))
     
-
-def _load_defaults():
-    """Returns default for the USER.
-    A folder _USERCONFIGDIR will be created if not present and filled with default configs.
-    """
+    
+def init_userconfig():
+    """Checks for USERCONFIGDIR and creates default config files."""
     if not USERCONFIGDIR.exists():
         USERCONFIGDIR.mkdir(exist_ok=True, parents=True)
     if not USERCONFIGFILEPATH.exists():
         _shutil.copy(MODULEPATH/CONFIGFILENAME, USERCONFIGDIR)
+        
+
+def load_defaults():
+    """Returns default for the USER.
+    A folder _USERCONFIGDIR will be created if not present and filled with default configs.
+    """
+    init_userconfig()
     return load_config(USERCONFIGFILEPATH)
         

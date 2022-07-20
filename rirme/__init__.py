@@ -22,6 +22,7 @@ def init(name=None, path='.'):
     """
     path = _pathlib.Path(path)
     name = name or path.parent.name
+    _cfg.init_userconfig()
     cfpath = (path/_cfg.CONFIGFILENAME).absolute()
     if cfpath.exists():
         raise FileExistsError(f'{cfpath} already exists. Aborted.')
