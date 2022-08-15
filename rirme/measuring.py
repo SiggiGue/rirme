@@ -215,7 +215,7 @@ def estimate_adaptive_delay_and_decay(
     maxmedbgnoisesq = _np.max(_np.median(bgnoisesq, 0))
 
     bgnoiselevels = 10*_np.log10(_np.mean(bgnoisesq, 0))
-    bgnoiselevel = '|'.join(('{:6.1f}'.format(l) for l in bgnoiselevels))
+    bgnoiselevel = '|'.join(('{:6.1f}'.format(lbg) for lbg in bgnoiselevels))
     _logger.info(f'Background noise level ({bgnoiselevel}) dB (FS)')
     
     maxiter = (maxdecaytime_sec*samplerate)//blocksize
@@ -235,7 +235,7 @@ def estimate_adaptive_delay_and_decay(
 
         if _logger.level < _logging.WARNING:
             levels = max(levels, list(10*_np.log10(_np.mean(datasq, 0))))
-            level = '|'.join(('{:6.1f}'.format(l) for l in levels))
+            level = '|'.join(('{:6.1f}'.format(lv) for lv in levels))
             print(f'INFO: Max level: ({level}) dB (FS)', end='\r')
         
         maxmeddatasq = _np.max(_np.median(datasq, 0))
