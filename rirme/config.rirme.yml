@@ -23,7 +23,7 @@ sweep:
 noise:
   duration: 2
   level_dbfs: -6
-  
+
 sounddevice:
   device: 42  # look for devices via rirmeasuring.devices()
   channels: 18
