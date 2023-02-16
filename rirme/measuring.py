@@ -276,7 +276,10 @@ def estimate_lm_from_sweeps(refsweep, measured_sweeps, irlength, delays, window=
         hhir = HigherHarmonicImpulseResponse.from_sweeps(
             syncsweep=refsweep, 
             measuredsweep=measured_sweeps[:, channel])
-        irlength = min(hhir.max_hir_length(1), irlength)
+        if irlength:
+            irlength = min(hhir.max_hir_length(1), irlength)
+        else:
+            irlength = hhir.max_hir_length(1)
         linear_model = LinearModel.from_higher_harmonic_impulse_response(
             hhir=hhir, 
             length=irlength,
@@ -289,10 +292,10 @@ class Sweep(SyncSweep):
     @classmethod
     def from_config(cls, config):
         return cls(
-            startfreq=config['sweep']['startfreq'],
-            stopfreq=config['sweep']['stopfreq'],
-            durationappr=config['sweep']['durationappr'],
-            samplerate=config['measurement']['samplerate'],
+            startfreq=float(config['sweep']['startfreq']),
+            stopfreq=float(config['sweep']['stopfreq']),
+            durationappr=float(config['sweep']['durationappr']),
+            samplerate=float(config['measurement']['samplerate']),
         )
 
 
@@ -385,7 +388,8 @@ class Measurement(object):
         sweep, measured_sweeps = self.run_sweep_measurement()
         delays_total = _np.array(delays) + pausestart
         delays_total[:] = _np.median(delays_total).astype(_np.int)
-        linear_models = estimate_lm_from_sweeps(self._sweep, measured_sweeps, irlength, delays_total, window)
+        delay = _np.median(delays)
+        linear_models = estimate_lm_from_sweeps(self._sweep, measured_sweeps, irlength, delay, window)
         rirs = _np.array([lm.kernel.ir for lm in linear_models]).transpose()
 
         res = Result(
@@ -401,6 +405,21 @@ class Measurement(object):
             rirs=rirs)
         return res
 
+def reestimate_rir_from_result(res: Result, irlength):
+    sweep = SyncSweep(
+        startfreq=float(res.config['sweep']['startfreq']),
+        stopfreq=float(res.config['sweep']['stopfreq']),
+        durationappr=float(res.config['sweep']['durationappr']),
+        samplerate=float(res.config['measurement']['samplerate']),
+    )
+    linear_models = estimate_lm_from_sweeps(
+        sweep, 
+        res.measured_sweeps, 
+        irlength, 
+        res.delays, 
+        res.config['measurement']['window'])
+    rirs = _np.array([lm.kernel.ir for lm in linear_models]).transpose()
+    return rirs
 
 def run(path='.', repetitions=1, prefix=''):
     """Runs a RIR MEasurement
