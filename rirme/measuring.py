@@ -388,7 +388,7 @@ class Measurement(object):
         sweep, measured_sweeps = self.run_sweep_measurement()
         delays_total = _np.array(delays) + pausestart
         delays_total[:] = _np.median(delays_total).astype(_np.int)
-        delay = _np.ones_like(delay)*_np.median(delays)
+        delay = _np.ones_like(delays)*_np.median(delays)
         linear_models = estimate_lm_from_sweeps(self._sweep, measured_sweeps, irlength, delay, window)
         rirs = _np.array([lm.kernel.ir for lm in linear_models]).transpose()
 
