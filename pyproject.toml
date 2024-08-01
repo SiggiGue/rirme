@@ -24,7 +24,7 @@ syncsweptsine = {git = "https://github.com/SiggiGue/syncsweptsine.git"}
 pytest = "^5.0"
 pytest-assume = "^2.2"
 pytest-cov = "^2.7"
-ipython = "^7.7"
+ipython = ">= 8.10"
 jupyter = "^1.0"
 pyside2 = "^5.13"
 pylint = "^2.3"
