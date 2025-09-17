@@ -1,23 +1,23 @@
 [tool.poetry]
 name = "rirme"
-version = "0.1.0"
+version = "0.1.1"
 description = "Room Impulse Response Measuring and Evaluation package"
 authors = ["Siegfried Gündert <siegfried.guendert@uni-oldenburg.de>"]
 license = "MPL-2.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-click = "^7.0"
+click = ">=7.0"
 gccestimating = {git = "https://github.com/SiggiGue/gccestimating.git"}
-h5py = "^2.9"
-hdfdict = "^0.3.1"
+h5py = ">=2.9"
+hdfdict = {git = "https://github.com/SiggiGue/hdfdict.git"}
 matplotlib = "^3.1"
-numpy = "^1.17"
+numpy = ">=1.17"
 python = "^3.7"
-pyyaml = "^5.1"
-scipy = "^1.3"
-sounddevice = "^0.3.13"
-soundfile = "^0.10.2"
+pyyaml = ">=5.1"
+scipy = ">=1.3"
+sounddevice = ">=0.3.13"
+soundfile = ">=0.10.2"
 syncsweptsine = {git = "https://github.com/SiggiGue/syncsweptsine.git"}
 
 [tool.poetry.dev-dependencies]
