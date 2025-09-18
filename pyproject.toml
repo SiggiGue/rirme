@@ -12,10 +12,10 @@ gccestimating = {git = "https://github.com/SiggiGue/gccestimating.git"}
 h5py = ">=2.9"
 hdfdict = {git = "https://github.com/SiggiGue/hdfdict.git"}
 matplotlib = "^3.1"
-numpy = ">=1.17"
-python = "^3.7"
+numpy = ">=1.26"
+python = "^3.9"
 pyyaml = ">=5.1"
-scipy = ">=1.3"
+scipy = ">=1.11"
 sounddevice = ">=0.3.13"
 soundfile = ">=0.10.2"
 syncsweptsine = {git = "https://github.com/SiggiGue/syncsweptsine.git"}
@@ -34,4 +34,4 @@ rirme = 'rirme.shell:cli'
 
 [build-system]
 requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+build-backend = "poetry.core.masonry.api"
